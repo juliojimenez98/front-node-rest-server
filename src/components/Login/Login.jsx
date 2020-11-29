@@ -1,8 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import bg2 from "./bg2.jpg";
+import ErrorModal from "./ErrorModal";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errorRes, setErrorRes] = useState(undefined);
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleChange = (event) => {
+    // console.log(event.target.value);
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("http://localhost:3001/login", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.ok === true) {
+          console.log(data);
+          sessionStorage.setItem("token", data.token);
+          // window.location.href = "/";
+        }
+        if (data.ok === false) {
+          console.log(data);
+          setErrorRes(data.err.message);
+
+          setShowModal(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="w-full flex flex-wrap">
       <div className="w-full md:w-5/12 flex flex-col">
@@ -17,9 +62,9 @@ const Login = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M10 19l-7-7m0 0l7-7m-7 7h18"
                 ></path>
               </svg>
@@ -29,29 +74,28 @@ const Login = () => {
 
         <div className="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
           <p className="text-center text-3xl">Bienvenido</p>
-          <form
-            className="flex flex-col pt-3 md:pt-8"
-            onsubmit="event.preventDefault();"
-          >
+          <form className="flex flex-col pt-3 md:pt-8" onSubmit={handleSubmit}>
             <div className="flex flex-col pt-4">
-              <label for="email" className="text-lg">
+              <label htmlFor="email" className="text-lg">
                 Correo
               </label>
               <input
                 type="email"
-                id="email"
+                name="email"
+                onChange={handleChange}
                 placeholder="tucorreo@email.com"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
 
             <div className="flex flex-col pt-4">
-              <label for="password" className="text-lg">
+              <label htmlFor="password" className="text-lg">
                 Contraseña
               </label>
               <input
                 type="password"
-                id="password"
+                name="password"
+                onChange={handleChange}
                 placeholder="Contraseña"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
               />
@@ -67,9 +111,11 @@ const Login = () => {
           <div className="text-center pt-12 pb-12">
             <p>
               ¿No tienes cuenta?{" "}
-              <a href="/register" className="underline font-semibold">
-                Registrate aquí.
-              </a>
+              <Link to="/register">
+                <a href="{}" className="underline font-semibold">
+                  Registrate aquí.
+                </a>
+              </Link>
             </p>
           </div>
         </div>
@@ -82,6 +128,9 @@ const Login = () => {
           alt="background"
         />
       </div>
+      {showModal ? (
+        <ErrorModal setShowModal={setShowModal} errorMessage={errorRes} />
+      ) : null}
     </div>
   );
 };

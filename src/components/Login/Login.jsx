@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import bg2 from "./bg2.jpg";
+import ErrorModal from "./ErrorModal";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const Login = () => {
     password: "",
   });
   const [errorRes, setErrorRes] = useState(undefined);
+  const [showModal, setShowModal] = React.useState(false);
 
   const handleChange = (event) => {
     // console.log(event.target.value);
@@ -35,7 +37,10 @@ const Login = () => {
           // window.location.href = "/";
         }
         if (data.ok === false) {
+          console.log(data);
           setErrorRes(data.err.message);
+
+          setShowModal(true);
         }
       })
       .catch((err) => {
@@ -103,7 +108,6 @@ const Login = () => {
               Ingresar
             </button>
           </form>
-          <h1>{!errorRes ? <></> : errorRes}</h1>
           <div className="text-center pt-12 pb-12">
             <p>
               ¿No tienes cuenta?{" "}
@@ -124,6 +128,9 @@ const Login = () => {
           alt="background"
         />
       </div>
+      {showModal ? (
+        <ErrorModal setShowModal={setShowModal} errorMessage={errorRes} />
+      ) : null}
     </div>
   );
 };

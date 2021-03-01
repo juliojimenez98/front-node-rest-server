@@ -82,11 +82,11 @@ const Dashboard = () => {
               <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                 Actions
               </span>
-              <a href="#" class="text-blue-400 hover:text-blue-600 underline">
+              <a href="#a" class="text-blue-400 hover:text-blue-600 underline">
                 Edit
               </a>
               <a
-                href="#"
+                href="#a"
                 class="text-blue-400 hover:text-blue-600 underline pl-6"
               >
                 Remove
@@ -100,13 +100,13 @@ const Dashboard = () => {
               </span>
               ghome
             </td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+            <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
               <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                 Country
               </span>
               Switzerland
             </td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+            <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
               <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                 Status
               </span>
@@ -114,15 +114,15 @@ const Dashboard = () => {
                 inactive
               </span>
             </td>
-            <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+            <td class="w-full lg:w-auto p-3 text-gray-800  border border-b text-center block lg:table-cell relative lg:static">
               <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                 Actions
               </span>
-              <a href="#" class="text-blue-400 hover:text-blue-600 underline">
+              <a href="#a" class="text-blue-400 hover:text-blue-600 underline">
                 Edit
               </a>
               <a
-                href="#"
+                href="#a"
                 class="text-blue-400 hover:text-blue-600 underline pl-6"
               >
                 Remove
